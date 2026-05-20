@@ -1,274 +1,769 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Apps</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        header {
-            background-color: #4a6fa5;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
-        nav {
-            background-color: #333;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: bold;
-        }
-        
-        nav a:hover {
-            color: #4a6fa5;
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 2rem;
-            overflow: hidden;
-        }
-        
-        section {
-            padding: 2rem 0;
-        }
-        
-        .app-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        
-        .app {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            width: calc(33% - 20px);
-            min-width: 250px;
-            transition: transform 0.3s ease;
-        }
-        
-        .app:hover {
-            transform: translateY(-5px);
-        }
-        
-        .app img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-        
-        .app-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-        }
-        
-        .app-links a {
-            background: #4a6fa5;
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        
-        .app-links a:hover {
-            background: #3a5980;
-        }
-        
-        .contact-form {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        button {
-            background: #4a6fa5;
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background: #3a5980;
-        }
-        
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yavcin Apps — Independent iOS Apps</title>
+<meta name="description" content="Yavcin Apps — independent iOS apps for collectors, students, and creators." />
+<link rel="icon" type="image/png" href="icons/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9;
+    --bg-soft: #f4f4f2;
+    --surface: #ffffff;
+    --surface-2: #f7f7f5;
+    --border: #e8e8e5;
+    --border-soft: #efefec;
+    --text: #0a0a0b;
+    --text-dim: #5c5c66;
+    --text-muted: #8e8e98;
+    --accent: #6366f1;
+    --accent-soft: #eef0ff;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  }
 
-        @media (max-width: 768px) {
-            .app {
-                width: 100%;
-            }
-        }
-    </style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.10) 0%, rgba(236, 72, 153, 0.05) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -300px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 249, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-soft);
+    z-index: 100;
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--gradient);
+    box-shadow: 0 4px 12px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+
+  .logo-mark img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .nav-links { display: flex; gap: 28px; }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+  }
+
+  .hero .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface-2);
+    border-color: #d4d4d0;
+  }
+
+  .section { padding: 60px 0; }
+
+  .section-head { margin-bottom: 40px; }
+
+  .section-head .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .section-head p {
+    color: var(--text-dim);
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+
+  .featured {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 8px 32px rgba(0,0,0,0.04);
+  }
+
+  .featured::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .featured-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .featured-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .featured h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+
+  .featured p {
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    max-width: 460px;
+  }
+
+  .featured-icon-wrap { flex-shrink: 0; }
+
+  .featured-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--bg-soft);
+    box-shadow: 0 20px 50px rgba(99, 102, 241, 0.20), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  .featured-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .app-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+
+  .app-card:hover {
+    border-color: #d4d4d0;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+
+  .app-card:hover .app-icon img { transform: scale(1.05); }
+  .app-card:hover .app-arrow { transform: translateX(4px); opacity: 1; }
+
+  .app-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: var(--bg-soft);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  .app-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.25s;
+  }
+
+  .app-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+
+  .app-category {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .app-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .app-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .app-link {
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .app-arrow {
+    color: var(--text-dim);
+    transition: all 0.25s;
+    opacity: 0.6;
+  }
+
+  .contact {
+    text-align: center;
+    padding: 80px 0 60px;
+  }
+
+  .contact h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .contact p {
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-form {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .form-group { margin-bottom: 12px; }
+
+  input, textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .contact-form button {
+    width: 100%;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+  }
+
+  .contact-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 32px 0;
+    margin-top: 40px;
+  }
+
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 60px 0 50px; }
+    .featured { padding: 32px 24px; }
+    .featured-content { grid-template-columns: 1fr; text-align: center; }
+    .featured-icon-wrap { margin: 0 auto; }
+    .featured-icon { width: 88px; height: 88px; border-radius: 20px; }
+    .featured p { margin-left: auto; margin-right: auto; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { gap: 16px; font-size: 0.85rem; }
+    footer .container { flex-direction: column; text-align: center; }
+    footer a { margin: 0 10px; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>My Apps</h1>
-            <p>Mobile & Web Application Solutions</p>
+
+<nav>
+  <div class="container">
+    <div class="logo">
+      <span class="logo-mark">
+        <!-- Replace with: <img src="icons/logo.png" alt="Yavcin Apps"> -->
+        Y
+      </span>
+      Yavcin Apps
+    </div>
+    <div class="nav-links">
+      <a href="#apps">Apps</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Eight apps live on the App Store
+    </div>
+    <h1>
+      Independent apps,<br>
+      <span class="gradient-text">made for iPhone.</span>
+    </h1>
+    <p>Yavcin Apps builds focused iOS tools for collectors, students, and creators — from card scanners to writing assistants, crafted with care.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn btn-primary">See the apps →</a>
+      <a href="https://apps.apple.com/us/developer/talha-yavcin/id1681776709" target="_blank" rel="noopener" class="btn btn-secondary">View on App Store</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="featured">
+      <div class="featured-content">
+        <div>
+          <span class="featured-tag">Featured</span>
+          <h3>Cardex — TCG Card Scanner</h3>
+          <p>Scan, value, and manage your Pokémon card collection with a price guide updated in real time. Built for serious collectors.</p>
+          <a href="https://apps.apple.com/us/app/cardex-tcg-card-value-scanner/id6749782255" target="_blank" rel="noopener" class="btn btn-primary">Download on App Store</a>
         </div>
-    </header>
-
-    <nav>
-        <div class="container">
-            <a href="#apps">Apps</a>
-            <a href="#contact">Contact</a>
+        <div class="featured-icon-wrap">
+          <div class="featured-icon">
+            <img src="icons/cardex.png" alt="Cardex">
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
 
-    <section id="apps">
-        <div class="container">
-            <h2>My Applications</h2>
-            
-            <div class="app-container">
-                <div class="app">
-                    <img src="app1.png" alt="App 1 Screenshot">
-                    <h3>Grammar Check Corrector</h3>
-                    <p>Elevate Your Writing with Grammar Checker</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/grammar-check-corrector/id6504800128" target="_blank">App Store</a>
-                    </div>
-                </div>
-                
-                <div class="app">
-                    <img src="app2.png" alt="App 2 Screenshot">
-                    <h3>Sumato: AI Text Summarizer</h3>
-                    <p>Summarize smarter with quizzes! Turn summaries into learning with Summarizer. Easy, fast, and fun!</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/sumato-ai-summary-text/id6476230340" target="_blank">App Store</a>
-                    </div>
-                </div>
-                
-                <div class="app">
-                    <img src="app3.png" alt="App 3 Screenshot">
-                    <h3>Paraphrasing Tool</h3>
-                    <p>Join Paraphraser today and experience a new world of writing. Simple, effective, and fun – Paraphraser is here to transform your writing journey!</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/paraphrase-rewrite-tool/id6472616589" target="_blank">App Store</a>
-                    </div>
-                </div>
+    <div class="section-head" id="apps">
+      <div class="label">All apps</div>
+      <h2>The full collection</h2>
+      <p>Eight apps available on the iOS App Store.</p>
+    </div>
 
-                <div class="app">
-                    <img src="app4.png" alt="App 3 Screenshot">
-                    <h3>Transcribe Voice Notes: Echoo</h3>
-                    <p>Transcribe, summarize, and share in 50+ languages. Voice to text made easy.</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/transcribe-voice-notes-echoo/id6633411235" target="_blank">App Store</a>
-                    </div>
-                </div>
+    <div class="apps-grid">
 
-                <div class="app">
-                    <img src="app5.png" alt="App 3 Screenshot">
-                    <h3>Antique Identifier: AntiqueEye</h3>
-                    <p>AntiqueEye – Turn Your Camera into an Antique Expert</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/antique-identifier-antiqueeye/id6742400491" target="_blank">App Store</a>
-                    </div>
-                </div>
-            </div>
+      <a href="https://apps.apple.com/us/app/signature-scanner-sign-pdf/id6761727005" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/signature.png" alt="Signature Scanner"></div>
+          <div>
+            <div class="app-title">Signature Scanner</div>
+            <div class="app-category">Productivity</div>
+          </div>
         </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>Please fill out the form below to get in touch regarding my applications or for any inquiries.</p>
-            
-            <div class="contact-form">
-                <form id="contact" action="https://formspree.io/f/xldjrbly" method="POST">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
+        <div class="app-desc">Sign PDFs, fill forms, and manage documents — all on your iPhone.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
         </div>
-    </section>
+      </a>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025. All rights reserved.</p>
+      <a href="https://apps.apple.com/us/app/sports-card-scanner-scanr/id6760708206" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/scanr.png" alt="Scanr"></div>
+          <div>
+            <div class="app-title">Scanr — Sports Cards</div>
+            <div class="app-category">Lifestyle</div>
+          </div>
         </div>
-    </footer>
+        <div class="app-desc">Value, grade and collect sports cards with instant card recognition.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
 
-    <script>
-        document.getElementById('contact').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            
-            alert('Thank you for your message, ' + name + '! I will get back to you soon.');
-            this.reset();
-        });
-    </script>
+      <a href="https://apps.apple.com/us/app/is-it-ai-ai-image-detector/id6754396654" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/is-it-ai.png" alt="is it AI?"></div>
+          <div>
+            <div class="app-title">is it AI?</div>
+            <div class="app-category">Utilities</div>
+          </div>
+        </div>
+        <div class="app-desc">Detect fake photos and deepfakes with an on-device AI image detector.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://apps.apple.com/us/app/socratic-solve-school-answers/id6752564856" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/socratic.png" alt="Socratic Solve"></div>
+          <div>
+            <div class="app-title">Socratic Solve</div>
+            <div class="app-category">Education</div>
+          </div>
+        </div>
+        <div class="app-desc">School answers, math help, and homework assistance powered by AI.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://apps.apple.com/us/app/cardex-tcg-card-value-scanner/id6749782255" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/cardex.png" alt="Cardex"></div>
+          <div>
+            <div class="app-title">Cardex</div>
+            <div class="app-category">Lifestyle</div>
+          </div>
+        </div>
+        <div class="app-desc">TCG card value scanner and price guide for Pokémon collectors.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://apps.apple.com/us/app/fish-identifier-aquaid/id6747436797" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/aquaid.png" alt="AquaID"></div>
+          <div>
+            <div class="app-title">AquaID</div>
+            <div class="app-category">Reference</div>
+          </div>
+        </div>
+        <div class="app-desc">Identify fish species instantly with your camera. Scanner and reference combined.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://apps.apple.com/us/app/grammar-check-corrector/id6504800128" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/grammar.png" alt="Grammar Corrector"></div>
+          <div>
+            <div class="app-title">Grammar Corrector</div>
+            <div class="app-category">Productivity</div>
+          </div>
+        </div>
+        <div class="app-desc">AI spell checker and proofreader for clearer, more polished writing.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://apps.apple.com/us/app/paraphrase-tool-rewordy/id6472616589" target="_blank" rel="noopener" class="app-card">
+        <div class="app-header">
+          <div class="app-icon"><img src="icons/rewordy.png" alt="ReWordy"></div>
+          <div>
+            <div class="app-title">ReWordy</div>
+            <div class="app-category">Productivity</div>
+          </div>
+        </div>
+        <div class="app-desc">Humanize AI text and paraphrase with ease. Simple, effective, fun.</div>
+        <div class="app-footer">
+          <span class="app-link">App Store</span>
+          <span class="app-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <h2>Let's get in touch</h2>
+    <p>Have a question about one of the apps, found a bug, or want to collaborate? Send a message.</p>
+
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xldjrbly" method="POST">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="subject" placeholder="Subject" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Your message..." required></textarea>
+      </div>
+      <button type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Yavcin Apps. All rights reserved.</div>
+    <div>
+      <a href="https://apps.apple.com/us/developer/talha-yavcin/id1681776709" target="_blank" rel="noopener">App Store</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = new FormData(this).get('name');
+    alert('Thanks ' + name + '! I will get back to you soon.');
+    this.reset();
+  });
+</script>
+
 </body>
 </html>
